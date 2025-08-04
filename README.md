@@ -1,7 +1,7 @@
 Battleship
 ==========
 
-Battleship
+Battleship in JS
 
 Features
 --------
@@ -12,9 +12,14 @@ Features
 - [x] Places ships at coordinates
 - [x] Receives attacks and reports if all ships are sunk
 - [x] Keeps track of missed attacks to display them
-- [ ] Player class
-- [ ] Contains a gameboard
-- [ ] Can either be real or computer player
+- [x] Player class
+- [x] Contains a gameboard
+- [x] Can either be real or computer player
+- [ ] Display this info on the DOM
+- [ ] Make basic ai for computer type players
+- [ ] Add ability for players to hit the opponents board
+- [ ] Add ability for players to place ships
+- [ ] Style page to look presentable
 
 How to use this project
 -----------------------
