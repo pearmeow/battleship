@@ -6,13 +6,12 @@ Battleship
 Features
 --------
 
-- [ ] Ship class
-- [ ] Has length, times hit, and sunk or not
-- [ ] Gameboard class
-- [ ] Places ships at coordinates
-- [ ] Receives attacks and changes state based on turn
-- [ ] Reports if all ships are sunk on a player's board
-- [ ] Keeps track of missed attacks to display them
+- [x] Ship class
+- [x] Has length, times hit, and sunk or not
+- [x] Gameboard class
+- [x] Places ships at coordinates
+- [x] Receives attacks and reports if all ships are sunk
+- [x] Keeps track of missed attacks to display them
 - [ ] Player class
 - [ ] Contains a gameboard
 - [ ] Can either be real or computer player
