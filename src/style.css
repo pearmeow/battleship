@@ -1,0 +1,29 @@
+*,
+*::before,
+*::after {
+    box-sizing: content-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.turn {
+    flex: 1 0 0;
+}
+
+.content {
+    flex: 5 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.gridOne,
+.gridTwo {
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+}
