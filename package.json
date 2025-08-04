@@ -1,8 +1,8 @@
 {
-  "name": "js-proj-template CHANGEME",
+  "name": "battleship",
   "version": "1.0.0",
-  "description": "Javascript project template CHANGEME",
-  "main": "webpack.common.js CHANGEME",
+  "description": "Battleship",
+  "main": "./src/index.js",
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
@@ -31,5 +31,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pearmeow/battleship.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pearmeow/battleship/issues"
+  },
+  "homepage": "https://github.com/pearmeow/battleship#readme"
 }
