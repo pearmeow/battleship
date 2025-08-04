@@ -150,3 +150,18 @@ describe("Gameboard tests", () => {
         });
     });
 });
+
+describe("Player tests", () => {
+    test("Computer player should be default", () => {
+        const cpu = new Player();
+        expect(cpu.type).toBe("cpu");
+    });
+    test("Player with name should be not computer", () => {
+        const real = new Player("Name");
+        expect(real.type).toBe("real");
+    });
+    test("Player should have a board", () => {
+        const player = new Player();
+        expect(player.board).toBeInstanceOf(Gameboard);
+    });
+});

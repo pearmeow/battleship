@@ -58,3 +58,14 @@ export class Gameboard {
         return this.ships === 0;
     }
 }
+
+export class Player {
+    constructor(name = null) {
+        if (name === null) {
+            this.type = "cpu";
+        } else {
+            this.type = "real";
+        }
+        this.board = new Gameboard();
+    }
+}
