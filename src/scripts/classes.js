@@ -60,12 +60,32 @@ export class Gameboard {
 }
 
 export class Player {
-    constructor(name = null) {
-        if (name === null) {
+    constructor(name = null, turn = false) {
+        this.turn = turn;
+        this.name = name;
+        if (this.name === null) {
             this.type = "cpu";
         } else {
             this.type = "real";
         }
         this.board = new Gameboard();
+        // remove this later but for now we will hardcode ships
+        this.board.placeShip(0, 0, 0, 5);
+        this.board.placeShip(1, 1, 1, 5);
+        this.board.placeShip(2, 2, 2, 5);
+        this.board.placeShip(3, 3, 3, 5);
+        this.board.placeShip(4, 4, 4, 5);
+    }
+    getAttacked(x, y) {
+        if (!this.turn && !this.board.allSunk()) {
+            let success = this.board.receiveAttack(x, y);
+            if (this.board.allSunk()) {
+                // do something and the game ends
+            }
+            return success;
+        }
+    }
+    toggleTurn() {
+        this.turn = !this.turn;
     }
 }
