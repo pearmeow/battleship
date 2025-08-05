@@ -41,9 +41,6 @@ export class Gameboard {
         ++this.ships;
     }
     receiveAttack(x, y) {
-        if (this.board[x][y][0] === true) {
-            throw Error("Can't attack same place twice");
-        }
         this.board[x][y][0] = true;
         if (this.board[x][y][1] !== null) {
             this.board[x][y][1].hit();
@@ -77,13 +74,14 @@ export class Player {
         this.board.placeShip(4, 4, 4, 5);
     }
     getAttacked(x, y) {
-        if (!this.turn && !this.board.allSunk()) {
+        if (this.turn && !this.board.allSunk()) {
             let success = this.board.receiveAttack(x, y);
             if (this.board.allSunk()) {
                 // do something and the game ends
             }
             return success;
         }
+        return null;
     }
     toggleTurn() {
         this.turn = !this.turn;
