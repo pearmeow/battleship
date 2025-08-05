@@ -18,16 +18,23 @@ Features
 - [x] Display this info on the DOM
 - [x] Make basic ai for computer type players
 - [x] Add ability for players to hit the opponents board
-- [ ] Add ability for players to place ships
-- [ ] Style page to look presentable
+- [x] Add ability for players to place ships
+- [x] Style page to look presentable
+
+Known Limitations
+-----------------
+
+- You can't play with a different player
+- The AI always guesses the same spots
+- The computer's ships always are placed at the same spots
+- The form is not a very intuitive way of placing ships
 
 How to use this project
 -----------------------
 
-Visit the live version [here]()! Or clone the repo and run `npm run build` in the project's root directory, then visit dist/index.html on your favorite browser.
+Visit the live version [here](https://pearmeow.github.io/battleship)! Or clone the repo and run `npm run build` in the project's root directory, then visit dist/index.html on your favorite browser.
 
 Credits
 -------
 
-[Something by some person]()  
-[Something by some other person]()
+Yes, I did everything.
