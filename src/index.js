@@ -125,7 +125,7 @@ function makePlaceShipsForm() {
     const startBtn = document.createElement("button");
     const randomizeBtn = document.createElement("button");
     const redoBtn = document.createElement("button");
-    shipsLeft.textContent = "Ship lengths left to place: ";
+    shipsLeft.textContent = "Lengths of ships you can place: ";
     for (let i = 0; i < validLengths.length; ++i) {
         shipsLeft.textContent += `${validLengths[i]} `;
     }
@@ -180,7 +180,7 @@ function makePlaceShipsForm() {
         x2.value = 1;
         y1.value = 1;
         y2.value = 1;
-        shipsLeft.textContent = "Ship lengths left to place: ";
+        shipsLeft.textContent = "Lengths of ships you can place: ";
         for (let i = 0; i < validLengths.length; ++i) {
             shipsLeft.textContent += `${validLengths[i]} `;
         }
@@ -197,7 +197,7 @@ function makePlaceShipsForm() {
         validLengths = [];
         playerOne.randomizeBoard();
         redrawGrid(playerOne, playerTwo, playerOneGrid, playerTwoGrid);
-        shipsLeft.textContent = "Ship lengths left to place: ";
+        shipsLeft.textContent = "Lengths of ships you can place: ";
         for (let i = 0; i < validLengths.length; ++i) {
             shipsLeft.textContent += `${validLengths[i]} `;
         }
@@ -205,7 +205,7 @@ function makePlaceShipsForm() {
     redoBtn.textContent = "Redo ships";
     redoBtn.addEventListener("click", () => {
         validLengths = [2, 2, 3, 3, 4, 4, 5];
-        shipsLeft.textContent = "Ship lengths left to place: ";
+        shipsLeft.textContent = "Lengths of ships you can place: ";
         for (let i = 0; i < validLengths.length; ++i) {
             shipsLeft.textContent += `${validLengths[i]} `;
         }
