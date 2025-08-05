@@ -30,6 +30,16 @@ export class Gameboard {
         if (!(x1 === x2 || y1 === y2)) {
             return null;
         }
+        if (x1 > x2) {
+            let temp = x2;
+            x2 = x1;
+            x1 = temp;
+        }
+        if (y1 > y2) {
+            let temp = y2;
+            y2 = y1;
+            y1 = temp;
+        }
         let length = Math.max(Math.abs(x2 - x1 + 1), Math.abs(y2 - y1 + 1));
         let ship = new Ship(length);
         for (let i = y1; i <= y2; ++i) {
