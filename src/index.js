@@ -5,8 +5,10 @@ console.log("This is some template text");
 
 function computerAttacks(computer, otherPlayer, domParent, otherDomParent) {
     setTimeout(() => {
-        const newAttack = computer.generateAttack();
-        otherPlayer.getAttacked(newAttack[0], newAttack[1]);
+        let newAttack = computer.generateAttack();
+        while (otherPlayer.getAttacked(newAttack[0], newAttack[1]) === false) {
+            newAttack = computer.generateAttack();
+        }
         if (otherPlayer.lost()) {
             winText.textContent = `${computer.name} won!`;
         } else {

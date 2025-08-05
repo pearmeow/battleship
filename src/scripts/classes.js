@@ -73,15 +73,17 @@ export class Gameboard {
         ++this.ships;
     }
     receiveAttack(x, y) {
+        if (this.board[x][y][0] === true) {
+            return false;
+        }
         this.board[x][y][0] = true;
         if (this.board[x][y][1] !== null) {
             this.board[x][y][1].hit();
             if (this.board[x][y][1].isSunk()) {
                 --this.ships;
             }
-            return true;
         }
-        return false;
+        return true;
     }
     allSunk() {
         return this.ships === 0;
@@ -105,7 +107,7 @@ export class Player {
     }
     getAttacked(x, y) {
         if (!this.turn && !this.gameboard.allSunk()) {
-            this.gameboard.receiveAttack(x, y);
+            return this.gameboard.receiveAttack(x, y);
         }
     }
     lost() {
@@ -116,13 +118,9 @@ export class Player {
     }
     generateAttack() {
         if (this.type === "cpu") {
-            let currAttack = [this.x, this.y];
-            if (this.x === 9) {
-                this.x = -1;
-                ++this.y;
-            }
-            this.y = this.y % 10;
-            ++this.x;
+            let currAttack = [];
+            currAttack.push(Math.floor(Math.random() * 10));
+            currAttack.push(Math.floor(Math.random() * 10));
             return currAttack;
         }
     }
