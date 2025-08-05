@@ -43,6 +43,16 @@ export class Gameboard {
         let length = Math.max(Math.abs(x2 - x1 + 1), Math.abs(y2 - y1 + 1));
         let ship = new Ship(length);
         for (let i = y1; i <= y2; ++i) {
+            if (this.board[x1][i][1] instanceof Ship) {
+                return null;
+            }
+        }
+        for (let i = x1; i <= x2; ++i) {
+            if (this.board[i][y1][1] instanceof Ship) {
+                return null;
+            }
+        }
+        for (let i = y1; i <= y2; ++i) {
             this.board[x1][i][1] = ship;
         }
         for (let i = x1; i <= x2; ++i) {

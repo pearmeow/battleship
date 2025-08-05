@@ -107,6 +107,12 @@ describe("Gameboard tests", () => {
             expect(ship.length()).toBe(2);
         });
 
+        test("Can't place ship at same location", () => {
+            const board = new Gameboard();
+            board.placeShip(0, 0, 0, 0);
+            expect(board.placeShip(0, 0, 0, 0)).toBe(null);
+        });
+
         test("No diagonal ships", () => {
             const board = new Gameboard();
             let x1 = 4;
