@@ -28,7 +28,7 @@ export class Gameboard {
     }
     placeShip(x1, y1, x2, y2) {
         if (!(x1 === x2 || y1 === y2)) {
-            throw new Error("Ships cannot be diagonal");
+            return null;
         }
         let length = Math.max(Math.abs(x2 - x1 + 1), Math.abs(y2 - y1 + 1));
         let ship = new Ship(length);
