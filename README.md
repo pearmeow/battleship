@@ -26,7 +26,6 @@ Known Limitations
 -----------------
 
 - You can't play with a different player
-- The AI always guesses the same spots
 - The form is not a very intuitive way of placing ships but we've got randomization now
 - There may be "flickering", which is just the board being disabled for the millisecond it takes for the AI to play
 
