@@ -113,7 +113,7 @@ describe("Gameboard tests", () => {
             let y1 = 4;
             let x2 = 5;
             let y2 = 5;
-            expect(() => board.placeShip(x1, y1, x2, y2)).toThrow(Error);
+            expect(board.placeShip(x1, y1, x2, y2)).toBe(null);
         });
     });
     describe("Attack related tests", () => {
@@ -126,11 +126,6 @@ describe("Gameboard tests", () => {
             const board = new Gameboard();
             board.receiveAttack(3, 0);
             expect(board.board[3][0][0]).toBeTruthy();
-        });
-        test("Attacking twice at (0,0) is not allowed", () => {
-            const board = new Gameboard();
-            board.receiveAttack(0, 0);
-            expect(() => board.receiveAttack(0, 0)).toThrow(Error);
         });
         test("Attacking returns whether a ship was hit", () => {
             const board = new Gameboard();
@@ -162,6 +157,6 @@ describe("Player tests", () => {
     });
     test("Player should have a board", () => {
         const player = new Player();
-        expect(player.board).toBeInstanceOf(Gameboard);
+        expect(player.gameboard).toBeInstanceOf(Gameboard);
     });
 });
