@@ -62,22 +62,23 @@ export class Player {
         this.name = name;
         if (this.name === null) {
             this.type = "cpu";
+            this.name = "Computer";
         } else {
             this.type = "real";
         }
-        this.board = new Gameboard();
+        this.gameboard = new Gameboard();
         // remove this later but for now we will hardcode ships
-        this.board.placeShip(0, 0, 0, 0);
+        this.gameboard.placeShip(0, 0, 0, 0);
     }
     getAttacked(x, y) {
-        if (!this.turn && !this.board.allSunk()) {
-            let success = this.board.receiveAttack(x, y);
+        if (!this.turn && !this.gameboard.allSunk()) {
+            let success = this.gameboard.receiveAttack(x, y);
             return success;
         }
         return null;
     }
     lost() {
-        return this.board.allSunk();
+        return this.gameboard.allSunk();
     }
     toggleTurn() {
         this.turn = !this.turn;
