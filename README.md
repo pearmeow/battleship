@@ -16,7 +16,7 @@ Features
 - [x] Contains a gameboard
 - [x] Can either be real or computer player
 - [x] Display this info on the DOM
-- [ ] Make basic ai for computer type players
+- [x] Make basic ai for computer type players
 - [x] Add ability for players to hit the opponents board
 - [ ] Add ability for players to place ships
 - [ ] Style page to look presentable
