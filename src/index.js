@@ -181,7 +181,6 @@ function makePlaceShipsForm() {
             formDivider.classList.add("hidden");
         }
     });
-    form.appendChild(shipsLeft);
     form.appendChild(x1Label);
     form.appendChild(x1);
     form.appendChild(y1Label);
@@ -191,6 +190,7 @@ function makePlaceShipsForm() {
     form.appendChild(y2Label);
     form.appendChild(y2);
     form.appendChild(submitBtn);
+    formDivider.appendChild(shipsLeft);
     formDivider.appendChild(form);
     formDivider.appendChild(errMsg);
     body.appendChild(formDivider);
