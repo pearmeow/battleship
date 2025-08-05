@@ -19,6 +19,7 @@ Features
 - [x] Make basic ai for computer type players
 - [x] Add ability for players to hit the opponents board
 - [x] Add ability for players to place ships
+- [x] Add randomized placements for computer and player
 - [x] Style page to look presentable
 
 Known Limitations
@@ -26,8 +27,7 @@ Known Limitations
 
 - You can't play with a different player
 - The AI always guesses the same spots
-- The computer's ships always are placed at the same spots
-- The form is not a very intuitive way of placing ships
+- The form is not a very intuitive way of placing ships but we've got randomization now
 - There may be "flickering", which is just the board being disabled for the millisecond it takes for the AI to play
 
 How to use this project
