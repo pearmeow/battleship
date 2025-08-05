@@ -1,4 +1,4 @@
-import { Ship, Gameboard, Player } from "./scripts/classes.js";
+import { Player } from "./scripts/classes.js";
 import "./style.css";
 
 console.log("This is some template text");
@@ -32,7 +32,7 @@ for (let y = 0; y < 10; ++y) {
             }
             playerOne.toggleTurn();
             playerTwo.toggleTurn();
-            currPlayer.textContent = "Player 2's turn";
+            currPlayer.textContent = "Player 1's turn";
         });
         playerOneGrid.appendChild(btnOne);
 
@@ -49,7 +49,7 @@ for (let y = 0; y < 10; ++y) {
             }
             playerOne.toggleTurn();
             playerTwo.toggleTurn();
-            currPlayer.textContent = "Player 1's turn";
+            currPlayer.textContent = "Player 2's turn";
         });
         playerTwoGrid.appendChild(btnTwo);
     }

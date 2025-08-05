@@ -74,7 +74,7 @@ export class Player {
         this.board.placeShip(4, 4, 4, 5);
     }
     getAttacked(x, y) {
-        if (this.turn && !this.board.allSunk()) {
+        if (!this.turn && !this.board.allSunk()) {
             let success = this.board.receiveAttack(x, y);
             if (this.board.allSunk()) {
                 // do something and the game ends
