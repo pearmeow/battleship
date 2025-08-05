@@ -80,6 +80,10 @@ function domPlaceShip(x1, y1, x2, y2, player) {
         return errorMessage;
     }
     let currSize = validLengths.length;
+    if (currSize === 0) {
+        errorMessage = "You cannot place any more ships!";
+        return errorMessage;
+    }
     let index = -1;
     for (let i = 0; i < currSize; ++i) {
         if (len === validLengths[i]) {
