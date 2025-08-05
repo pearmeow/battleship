@@ -1,4 +1,4 @@
-import { Ship, Player } from "./scripts/classes.js";
+import { Ship, Player, Gameboard } from "./scripts/classes.js";
 import "./style.css";
 
 console.log("This is some template text");
@@ -116,6 +116,9 @@ function makePlaceShipsForm() {
     const y2 = document.createElement("input");
     const submitBtn = document.createElement("button");
     const errMsg = document.createElement("p");
+    const startBtn = document.createElement("button");
+    const randomizeBtn = document.createElement("button");
+    const redoBtn = document.createElement("button");
     shipsLeft.textContent = "Ship lengths left to place: ";
     for (let i = 0; i < validLengths.length; ++i) {
         shipsLeft.textContent += `${validLengths[i]} `;
@@ -175,11 +178,33 @@ function makePlaceShipsForm() {
         for (let i = 0; i < validLengths.length; ++i) {
             shipsLeft.textContent += `${validLengths[i]} `;
         }
+    });
+    startBtn.textContent = "Start game?";
+    startBtn.addEventListener("click", () => {
         if (validLengths.length === 0) {
-            validLengths.textContent = "";
             gameStart = true;
             formDivider.classList.add("hidden");
         }
+    });
+    randomizeBtn.textContent = "Randomize ships";
+    randomizeBtn.addEventListener("click", () => {
+        validLengths = [];
+        playerOne.randomizeBoard();
+        redrawGrid(playerOne, playerTwo, playerOneGrid, playerTwoGrid);
+        shipsLeft.textContent = "Ship lengths left to place: ";
+        for (let i = 0; i < validLengths.length; ++i) {
+            shipsLeft.textContent += `${validLengths[i]} `;
+        }
+    });
+    redoBtn.textContent = "Redo ships";
+    redoBtn.addEventListener("click", () => {
+        validLengths = [2, 2, 3, 3, 4, 4, 5];
+        shipsLeft.textContent = "Ship lengths left to place: ";
+        for (let i = 0; i < validLengths.length; ++i) {
+            shipsLeft.textContent += `${validLengths[i]} `;
+        }
+        playerOne.gameboard = new Gameboard();
+        redrawGrid(playerOne, playerTwo, playerOneGrid, playerTwoGrid);
     });
     form.appendChild(x1Label);
     form.appendChild(x1);
@@ -193,6 +218,9 @@ function makePlaceShipsForm() {
     formDivider.appendChild(shipsLeft);
     formDivider.appendChild(form);
     formDivider.appendChild(errMsg);
+    formDivider.appendChild(startBtn);
+    formDivider.appendChild(randomizeBtn);
+    formDivider.appendChild(redoBtn);
     body.appendChild(formDivider);
 }
 
@@ -202,9 +230,9 @@ const currPlayer = document.createElement("p");
 const winText = document.createElement("p");
 const playerOne = new Player("Real Player", true);
 const playerTwo = new Player();
-const validLengths = [1, 2, 3];
 const playerOneGrid = document.createElement("div");
 const playerTwoGrid = document.createElement("div");
+let validLengths = [2, 2, 3, 3, 4, 4, 5];
 let gameStart = false;
 
 currPlayer.textContent = `${playerOne.name}'s turn`;

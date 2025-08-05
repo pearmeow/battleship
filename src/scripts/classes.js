@@ -30,6 +30,18 @@ export class Gameboard {
         if (!(x1 === x2 || y1 === y2)) {
             return null;
         }
+        if (
+            x2 < 0 ||
+            x2 > 9 ||
+            y2 < 0 ||
+            y2 > 9 ||
+            x1 < 0 ||
+            x1 > 9 ||
+            y1 < 0 ||
+            y1 > 9
+        ) {
+            return null;
+        }
         if (x1 > x2) {
             let temp = x2;
             x2 = x1;
@@ -86,9 +98,7 @@ export class Player {
             this.name = "Computer";
             this.x = 0;
             this.y = 0;
-            this.gameboard.placeShip(0, 0, 0, 0);
-            this.gameboard.placeShip(0, 1, 0, 3);
-            this.gameboard.placeShip(2, 0, 2, 2);
+            this.randomizeBoard();
         } else {
             this.type = "real";
         }
@@ -114,6 +124,53 @@ export class Player {
             this.y = this.y % 10;
             ++this.x;
             return currAttack;
+        }
+    }
+    randomizeBoard() {
+        this.gameboard = new Gameboard();
+        const lengths = [2, 2, 3, 3, 4, 4, 5];
+        while (lengths.length > 0) {
+            // 0 = left, 1 = down, 2 = up, 3 = right
+            let len = lengths[lengths.length - 1] - 1;
+            let startX = Math.floor(Math.random() * 9);
+            let startY = Math.floor(Math.random() * 9);
+            if (
+                this.gameboard.placeShip(
+                    startX,
+                    startY,
+                    startX + len,
+                    startY,
+                ) !== null
+            ) {
+                lengths.pop();
+            } else if (
+                this.gameboard.placeShip(
+                    startX,
+                    startY,
+                    startX,
+                    startY + len,
+                ) !== null
+            ) {
+                lengths.pop();
+            } else if (
+                this.gameboard.placeShip(
+                    startX,
+                    startY,
+                    startX - len,
+                    startY,
+                ) !== null
+            ) {
+                lengths.pop();
+            } else if (
+                this.gameboard.placeShip(
+                    startX,
+                    startY,
+                    startX,
+                    startY - len,
+                ) !== null
+            ) {
+                lengths.pop();
+            }
         }
     }
 }

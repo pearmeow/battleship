@@ -13,6 +13,11 @@ body {
 button {
     border-radius: 0;
     border: 1px solid lightgrey;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: initial;
 }
 
 form {
