@@ -80,17 +80,18 @@ export class Player {
     constructor(name = null, turn = false) {
         this.turn = turn;
         this.name = name;
+        this.gameboard = new Gameboard();
         if (this.name === null) {
             this.type = "cpu";
             this.name = "Computer";
             this.x = 0;
             this.y = 0;
+            this.gameboard.placeShip(0, 0, 0, 0);
+            this.gameboard.placeShip(0, 1, 0, 3);
+            this.gameboard.placeShip(2, 0, 2, 2);
         } else {
             this.type = "real";
         }
-        this.gameboard = new Gameboard();
-        // remove this later but for now we will hardcode ships
-        this.gameboard.placeShip(9, 9, 9, 9);
     }
     getAttacked(x, y) {
         if (!this.turn && !this.gameboard.allSunk()) {

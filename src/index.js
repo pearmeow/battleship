@@ -21,21 +21,27 @@ function computerAttacks(computer, otherPlayer, domParent, otherDomParent) {
 function redrawGrid(player, otherPlayer, domParent, otherDomParent) {
     const theGrid = player.gameboard.board;
     domParent.replaceChildren();
-    for (let y = 0; y < 10; ++y) {
+    for (let y = 9; y >= 0; --y) {
         for (let x = 0; x < 10; ++x) {
             const btn = document.createElement("button");
             if (player.turn === true || otherPlayer.type === "cpu") {
                 btn.setAttribute("disabled", "");
             }
+            if (theGrid[x][y][1] instanceof Ship && player.type !== "cpu") {
+                btn.style.backgroundColor = "cyan";
+            }
             if (theGrid[x][y][0] === true) {
                 if (theGrid[x][y][1] instanceof Ship) {
-                    btn.textContent = "X";
+                    btn.style.backgroundColor = "red";
                 } else {
-                    btn.textContent = "O";
+                    btn.style.backgroundColor = "grey";
                 }
                 btn.setAttribute("disabled", "");
             }
             btn.addEventListener("click", () => {
+                if (!gameStart) {
+                    return;
+                }
                 player.getAttacked(x, y);
                 if (!player.lost()) {
                     player.toggleTurn();
@@ -72,13 +78,14 @@ function domPlaceShip(x1, y1, x2, y2, player) {
         return errorMessage;
     }
     let currSize = validLengths.length;
+    let index = -1;
     for (let i = 0; i < currSize; ++i) {
         if (len === validLengths[i]) {
-            validLengths.splice(i, 1);
+            index = i;
             break;
         }
     }
-    if (currSize === validLengths.length) {
+    if (index === -1) {
         errorMessage = "That's not a valid length for a ship!";
         return errorMessage;
     }
@@ -87,6 +94,8 @@ function domPlaceShip(x1, y1, x2, y2, player) {
         errorMessage = "You can't place a ship on another ship!";
         return errorMessage;
     }
+    validLengths.splice(index, 1);
+    errorMessage = `Ship placed from (${x1 + 1}, ${y1 + 1}) to (${x2 + 1}, ${y2 + 1})`;
     redrawGrid(playerOne, playerTwo, playerOneGrid, playerTwoGrid);
     redrawGrid(playerTwo, playerOne, playerTwoGrid, playerOneGrid);
     return errorMessage;
@@ -96,6 +105,7 @@ function makePlaceShipsForm() {
     const body = document.querySelector("body");
     const formDivider = document.createElement("div");
     const form = document.createElement("form");
+    const shipsLeft = document.createElement("p");
     const x1Label = document.createElement("label");
     const x2Label = document.createElement("label");
     const y1Label = document.createElement("label");
@@ -106,6 +116,10 @@ function makePlaceShipsForm() {
     const y2 = document.createElement("input");
     const submitBtn = document.createElement("button");
     const errMsg = document.createElement("p");
+    shipsLeft.textContent = "Ship lengths left to place: ";
+    for (let i = 0; i < validLengths.length; ++i) {
+        shipsLeft.textContent += `${validLengths[i]} `;
+    }
     x1Label.textContent = "x1";
     x2Label.textContent = "x2";
     y1Label.textContent = "y1";
@@ -122,14 +136,22 @@ function makePlaceShipsForm() {
     x2.setAttribute("type", "number");
     y1.setAttribute("type", "number");
     y2.setAttribute("type", "number");
-    x1.setAttribute("min", "0");
-    x2.setAttribute("min", "0");
-    y1.setAttribute("min", "0");
-    y2.setAttribute("min", "0");
-    x1.setAttribute("max", "9");
-    x2.setAttribute("max", "9");
-    y1.setAttribute("max", "9");
-    y2.setAttribute("max", "9");
+    x1.setAttribute("min", "1");
+    x2.setAttribute("min", "1");
+    y1.setAttribute("min", "1");
+    y2.setAttribute("min", "1");
+    x1.setAttribute("max", "10");
+    x2.setAttribute("max", "10");
+    y1.setAttribute("max", "10");
+    y2.setAttribute("max", "10");
+    x1.setAttribute("required", "");
+    x2.setAttribute("required", "");
+    y1.setAttribute("required", "");
+    y2.setAttribute("required", "");
+    x1.value = 1;
+    x2.value = 1;
+    y1.value = 1;
+    y2.value = 1;
     x1Label.setAttribute("for", "x1");
     x2Label.setAttribute("for", "x2");
     y1Label.setAttribute("for", "y1");
@@ -138,24 +160,34 @@ function makePlaceShipsForm() {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         let err = domPlaceShip(
-            x1.value,
-            y1.value,
-            x2.value,
-            y2.value,
+            x1.value - 1,
+            y1.value - 1,
+            x2.value - 1,
+            y2.value - 1,
             playerOne,
         );
         errMsg.textContent = err;
-        x1.value = 0;
-        x2.value = 0;
-        y1.value = 0;
-        y2.value = 0;
+        x1.value = 1;
+        x2.value = 1;
+        y1.value = 1;
+        y2.value = 1;
+        shipsLeft.textContent = "Ship lengths left to place: ";
+        for (let i = 0; i < validLengths.length; ++i) {
+            shipsLeft.textContent += `${validLengths[i]} `;
+        }
+        if (validLengths.length === 0) {
+            validLengths.textContent = "";
+            gameStart = true;
+            formDivider.classList.add("hidden");
+        }
     });
+    form.appendChild(shipsLeft);
     form.appendChild(x1Label);
     form.appendChild(x1);
-    form.appendChild(x2Label);
-    form.appendChild(x2);
     form.appendChild(y1Label);
     form.appendChild(y1);
+    form.appendChild(x2Label);
+    form.appendChild(x2);
     form.appendChild(y2Label);
     form.appendChild(y2);
     form.appendChild(submitBtn);
@@ -170,9 +202,10 @@ const currPlayer = document.createElement("p");
 const winText = document.createElement("p");
 const playerOne = new Player("Real Player", true);
 const playerTwo = new Player();
-const validLengths = [5, 4, 3, 2, 1];
+const validLengths = [1, 2, 3];
 const playerOneGrid = document.createElement("div");
 const playerTwoGrid = document.createElement("div");
+let gameStart = false;
 
 currPlayer.textContent = `${playerOne.name}'s turn`;
 currPlayer.classList.add("turn");
