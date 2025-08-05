@@ -28,6 +28,7 @@ Known Limitations
 - The AI always guesses the same spots
 - The computer's ships always are placed at the same spots
 - The form is not a very intuitive way of placing ships
+- There may be "flickering", which is just the board being disabled for the millisecond it takes for the AI to play
 
 How to use this project
 -----------------------
