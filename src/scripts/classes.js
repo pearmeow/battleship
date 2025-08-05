@@ -67,21 +67,17 @@ export class Player {
         }
         this.board = new Gameboard();
         // remove this later but for now we will hardcode ships
-        this.board.placeShip(0, 0, 0, 5);
-        this.board.placeShip(1, 1, 1, 5);
-        this.board.placeShip(2, 2, 2, 5);
-        this.board.placeShip(3, 3, 3, 5);
-        this.board.placeShip(4, 4, 4, 5);
+        this.board.placeShip(0, 0, 0, 0);
     }
     getAttacked(x, y) {
         if (!this.turn && !this.board.allSunk()) {
             let success = this.board.receiveAttack(x, y);
-            if (this.board.allSunk()) {
-                // do something and the game ends
-            }
             return success;
         }
         return null;
+    }
+    lost() {
+        return this.board.allSunk();
     }
     toggleTurn() {
         this.turn = !this.turn;
