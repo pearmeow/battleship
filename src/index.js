@@ -6,6 +6,7 @@ console.log("This is some template text");
 function computerAttacks(computer, otherPlayer, domParent, otherDomParent) {
     setTimeout(() => {
         let newAttack = computer.generateAttack();
+        currPlayer.textContent = `${otherPlayer.name}'s turn`;
         while (otherPlayer.getAttacked(newAttack[0], newAttack[1]) === false) {
             newAttack = computer.generateAttack();
         }
@@ -234,7 +235,7 @@ const body = document.querySelector("body");
 const content = document.createElement("div");
 const currPlayer = document.createElement("p");
 const winText = document.createElement("p");
-const playerOne = new Player("Real Player", true);
+const playerOne = new Player("Player", true);
 const playerTwo = new Player();
 const playerOneGrid = document.createElement("div");
 const playerTwoGrid = document.createElement("div");
